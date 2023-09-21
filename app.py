@@ -21,10 +21,11 @@ def form():
     
     if request.method == 'POST':
         data = {}
-        sepal_length= int(request.form['sepal length'])
-        sepal_width= int(request.form['sepal width'])
-        petal_length= int(request.form['petal length'])
-        petal_width = int(request.form['petal width'])
+        
+        sepal_length= float(request.form['sepal length'])
+        sepal_width= float(request.form['sepal width'])
+        petal_length= float(request.form['petal length'])
+        petal_width = float(request.form['petal width'])
         
         data={
             'sepal length':sepal_length,
@@ -32,7 +33,13 @@ def form():
             'petal length':petal_length,
             'petal width':petal_width,
         }
-     
+        # photo={
+        #     0: "./static/stock-photo-iris-setosa-is-a-perennial-plant-with-blue-flowers-2317812741.jpg",
+        #     1:"./static/versicolor.jpg",
+        #     2:"./static/virginica.jpg"
+        # }
+        # image= photo['']
+        
         df = pd.DataFrame(data, index=[0])
         
         result = model.predict(df)
@@ -43,10 +50,6 @@ def form():
     else:
         return render_template('form.html', title="identification")
 
-
-
-
-
 # Variables environement
 if __name__ == "__main__":
-    app.run(port=8080)
+    app.run(debug=True, host='0.0.0.0',port=8080)
